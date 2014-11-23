@@ -1,0 +1,38 @@
+12793 silly gunzTarPerm extractEntry index.js
+12794 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+12795 silly gunzTarPerm extractEntry LICENSE
+12796 silly gunzTarPerm modified mode [ 'LICENSE', 420, 438 ]
+12797 silly gunzTarPerm extractEntry package.json
+12798 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+12799 silly gunzTarPerm extractEntry README
+12800 silly gunzTarPerm modified mode [ 'README', 420, 438 ]
+12801 silly gunzTarPerm extractEntry test-parser.html
+12802 silly gunzTarPerm modified mode [ 'test-parser.html', 493, 511 ]
+12803 silly gunzTarPerm extractEntry test-tokenizer.html
+12804 silly gunzTarPerm modified mode [ 'test-tokenizer.html', 493, 511 ]
+12805 silly gunzTarPerm extractEntry tests.js
+12806 silly gunzTarPerm modified mode [ 'tests.js', 420, 438 ]
+12807 silly gunzTarPerm extractEntry Tokenizer.js
+12808 silly gunzTarPerm modified mode [ 'Tokenizer.js', 493, 511 ]
+12809 silly gunzTarPerm extractEntry unicodecategories.js
+12810 silly gunzTarPerm modified mode [ 'unicodecategories.js', 493, 511 ]
+12811 silly gunzTarPerm extractEntry ZeParser.js
+12812 silly gunzTarPerm modified mode [ 'ZeParser.js', 493, 511 ]
+12813 error Error: ENOENT, lstat 'D:\Users\Tong\WebstormProjects\NodeJS\node_modules\socket.io\node_modules\socket.io-client\node_modules\active-x-obfuscator\node_modules\zeparser\benchmark.html'
+12814 error If you need help, you may report this *entire* log,
+12814 error including the npm and node versions, at:
+12814 error     <http://github.com/npm/npm/issues>
+12815 error System Windows_NT 6.2.9200
+12816 error command "E:\\Program Files\\nodejs\\\\node.exe" "E:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+12817 error cwd D:\Users\Tong\WebstormProjects\NodeJS
+12818 error node -v v0.10.33
+12819 error npm -v 1.4.28
+12820 error path D:\Users\Tong\WebstormProjects\NodeJS\node_modules\socket.io\node_modules\socket.io-client\node_modules\active-x-obfuscator\node_modules\zeparser\benchmark.html
+12821 error fstream_path D:\Users\Tong\WebstormProjects\NodeJS\node_modules\socket.io\node_modules\socket.io-client\node_modules\active-x-obfuscator\node_modules\zeparser\benchmark.html
+12822 error fstream_type File
+12823 error fstream_class FileWriter
+12824 error code ENOENT
+12825 error errno 34
+12826 error fstream_stack E:\Program Files\nodejs\node_modules\npm\node_modules\fstream\lib\writer.js:287:26
+12826 error fstream_stack Object.oncomplete (evalmachine.<anonymous>:107:15)
+12827 verbose exit [ 34, true ]
