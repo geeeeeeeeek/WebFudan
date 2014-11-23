@@ -12,7 +12,7 @@ var addMessage = function (from, msg) {
     var avatar_index = Math.ceil(Math.random() * 5);
     var item = document.createElement('div');
     item.className = 'item';
-    var src = 'masterplate/img/avatar' + avatar_index + '.png';
+    var src = 'template/img/avatar' + avatar_index + '.png';
     item.innerHTML = '<img src=' + src + ' alt="user image" class="online"/>' +
     '<p class="message"><a class="name"><small class="text-muted pull-right">' +
     '<i class="fa fa-clock-o"></i>' + new Date().getHours() + ':'
@@ -24,7 +24,6 @@ var addMessage = function (from, msg) {
     document.querySelector('#input').focus();
 
 };
-
 
 var send = function () {
     var ele_msg = document.querySelector('#input');

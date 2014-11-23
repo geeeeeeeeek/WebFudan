@@ -1,8 +1,38 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: 14px "Microsoft YaHei", Arial, sans-serif;
+    height: 100%;
 }
 
-a {
-  color: #00B7FF;
+#chat-box {
+    min-height: 600px;
+    max-height: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.box.box-success {
+    border-radius: 0;
+}
+
+.font {
+    font-family: "Microsoft YaHei", Arial, sans-serif !important;
+}
+
+/*body > .header .logo {*/
+/*width: 180px;*/
+/*background-color: #3c8dbc;*/
+/*text-align: left;*/
+/*padding-left: 10px;*/
+/*}*/
+
+.skin-blue .left-side {
+    background: #fff;
+}
+
+div#canvas-frame {
+    border: none;
+    cursor: pointer;
+    width: 1000px;
+    height: 600px;
+    background-color: #f9f9f9 !important;
 }
