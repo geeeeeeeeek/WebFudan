@@ -2,7 +2,12 @@
  * Created by Tong on 11.23.
  */
 $(function () {
-    //Enable sidebar toggle
+    var name = sessionStorage.getItem("name");
+    if (!name){
+        window.location.href="login.html";
+        return;
+    }
+    document.getElementById("name").value = name;
     $("[data-toggle='offcanvas']").click(function (e) {
         e.preventDefault();
 

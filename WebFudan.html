@@ -7,30 +7,22 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="public/stylesheets/font-awesome.min.css" rel="stylesheet"
           type="text/css"/>
-    <!-- Ionicons -->
     <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
-    <!-- Theme style -->
     <link href="template/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
     <link href="public/stylesheets/style.css" rel="stylesheet" type="text/css"/>
 
-    <!-- jQuery 2.0.2 -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]><![endif]-->
     <script src="public/javascripts/Three.js"></script>
     <script src="public/javascripts/webgl.js"></script>
     <script src="public/javascripts/web_fudan.js"></script>
 </head>
 <body class="skin-blue" onload="threeStart();">
-<!-- header logo: style can be found in header.less -->
+<input id="name" type="text" hidden="hidden" value="">
 <header class="header">
-    <a href="WebFudan.html" class="logo font">
-        <!-- Add the class icon to your logo image or logo icon to add the margining -->
+    <a href="#" class="logo font">
         WebGL | 复旦3D校园
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
-        <!-- Sidebar toggle button-->
         <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -41,12 +33,10 @@
 
     </nav>
 </header>
+
 <div class="wrapper row-offcanvas row-offcanvas-left">
-    <!-- Left side column. contains the logo and sidebar -->
     <aside class="left-side sidebar-offcanvas">
-        <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar" style="background: #fff;">
-            <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
                     <img src="template/img/avatar3.png" class="img-circle" alt="User Image"/>
@@ -67,7 +57,6 @@
                 <div class="box-body chat" id="chat-box">
 
                 </div>
-                <!-- /.chat -->
                 <div class="box-footer" style="margin-bottom: 0;">
                     <div class="input-group">
                         <input class="form-control" placeholder="在此输入" id="input"/>
@@ -80,32 +69,14 @@
             </div>
 
         </section>
-        <!-- /.sidebar -->
     </aside>
 
-    <!-- Right side column. Contains the navbar and content of the page -->
     <aside class="right-side">
-        <!-- Content Header (Page header) -->
-        <!--<section class="content-header">-->
-            <!--<h1>-->
-                <!--Blank page-->
-                <!--<small>Control panel</small>-->
-            <!--</h1>-->
-            <!--<ol class="breadcrumb">-->
-                <!--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>-->
-                <!--<li class="active">Blank page</li>-->
-            <!--</ol>-->
-        <!--</section>-->
-
-        <!-- Main content -->
         <section class="content">
             <div id="canvas-frame"></div>
         </section>
-        <!-- /.content -->
     </aside>
-    <!-- /.right-side -->
 </div>
-<!-- ./wrapper -->
 
 
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

@@ -37,7 +37,7 @@ var send = function () {
 };
 
 ws.on('connect', function () {
-    var nickname = window.prompt('输入你的昵称!');
+    var nickname = document.getElementById("name").value;
     while (!nickname) {
         nickname = window.prompt('昵称不能为空，请重新输入!')
     }

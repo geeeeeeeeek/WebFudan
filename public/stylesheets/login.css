@@ -1,0 +1,12 @@
+.bg {
+    background-image: url('../images/bg_book.jpg') !important;
+    /*background-color: #005f8d;*/
+    /*width: 1080px;*/
+    /*height: ;*/
+    background-repeat:no-repeat;
+    background-size: 100%;
+}
+
+.form-box {
+    margin: 140px auto 0 auto !important;
+}
