@@ -22,6 +22,8 @@ $(function () {
             $('.left-side').toggleClass("collapse-left");
             $(".right-side").toggleClass("strech");
         }
+
+
     });
 
 });
