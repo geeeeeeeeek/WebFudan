@@ -1361,7 +1361,7 @@
 						while ( aoLocal[i][j+iColspan] !== undefined &&
 						        aoLocal[i][j].cell == aoLocal[i][j+iColspan].cell )
 						{
-							/* Must update the applied array over the rows for the columns */
+							/* Must get_update the applied array over the rows for the columns */
 							for ( k=0 ; k<iRowspan ; k++ )
 							{
 								aApplied[i+k][j+iColspan] = 1;
@@ -2876,7 +2876,7 @@
 				}
 			);
 			
-			/* Add a draw callback for the pagination on first instance, to update the paging display */
+			/* Add a draw callback for the pagination on first instance, to get_update the paging display */
 			if ( !oSettings.aanFeatures.p )
 			{
 				oSettings.aoDrawCallback.push( {
@@ -4131,7 +4131,7 @@
 				 * twice - once for when bProcessing is enabled, and another time for when it is 
 				 * disabled, as we need to perform slightly different actions.
 				 *   Basically the issue here is that the Javascript engine in modern browsers don't 
-				 * appear to allow the rendering engine to update the display while it is still executing
+				 * appear to allow the rendering engine to get_update the display while it is still executing
 				 * it's thread (well - it does but only after long intervals). This means that the 
 				 * 'processing' display doesn't appear for a table sort. To break the js thread up a bit
 				 * I force an execution break by using setTimeout - but this breaks the expected 
@@ -6120,12 +6120,12 @@
 		
 		/**
 		 * Update a table cell or row - this method will accept either a single value to
-		 * update the cell with, an array of values with one element for each column or
+		 * get_update the cell with, an array of values with one element for each column or
 		 * an object in the same format as the original data source. The function is
 		 * self-referencing in order to make the multi column updates easier.
-		 *  @param {object|array|string} mData Data to update the cell/row with
-		 *  @param {node|int} mRow TR element you want to update or the aoData index
-		 *  @param {int} [iColumn] The column to update (not used of mData is an array or object)
+		 *  @param {object|array|string} mData Data to get_update the cell/row with
+		 *  @param {node|int} mRow TR element you want to get_update or the aoData index
+		 *  @param {int} [iColumn] The column to get_update (not used of mData is an array or object)
 		 *  @param {bool} [bRedraw=true] Redraw the table or not
 		 *  @param {bool} [bAction=true] Perform pre-draw actions or not
 		 *  @returns {int} 0 on success, 1 on error
@@ -6134,7 +6134,7 @@
 		 *  @example
 		 *    $(document).ready(function() {
 		 *      var oTable = $('#example').dataTable();
-		 *      oTable.fnUpdate( 'Example update', 0, 0 ); // Single cell
+		 *      oTable.fnUpdate( 'Example get_update', 0, 0 ); // Single cell
 		 *      oTable.fnUpdate( ['a', 'b', 'c', 'd', 'e'], 1, 0 ); // Row
 		 *    } );
 		 */
@@ -6147,7 +6147,7 @@
 			
 			if ( $.isArray(mData) && iColumn === undefined )
 			{
-				/* Array update - update the whole row */
+				/* Array get_update - get_update the whole row */
 				oSettings.aoData[iRow]._aData = mData.slice();
 				
 				/* Flag to the function that we are recursing */
@@ -6158,7 +6158,7 @@
 			}
 			else if ( $.isPlainObject(mData) && iColumn === undefined )
 			{
-				/* Object update - update the whole row - assume the developer gets the object right */
+				/* Object get_update - get_update the whole row - assume the developer gets the object right */
 				oSettings.aoData[iRow]._aData = $.extend( true, {}, mData );
 		
 				for ( i=0 ; i<oSettings.aoColumns.length ; i++ )
@@ -6168,7 +6168,7 @@
 			}
 			else
 			{
-				/* Individual cell update */
+				/* Individual cell get_update */
 				_fnSetCellData( oSettings, iRow, iColumn, mData );
 				sDisplay = _fnGetCellData( oSettings, iRow, iColumn, 'display' );
 				
@@ -6184,7 +6184,7 @@
 				
 				if ( oSettings.aoData[iRow].nTr !== null )
 				{
-					/* Do the actual HTML update */
+					/* Do the actual HTML get_update */
 					_fnGetTdNodes( oSettings, iRow )[iColumn].innerHTML = sDisplay;
 				}
 			}
@@ -7232,7 +7232,7 @@
 		 * the addition of pagination controls by extending this object, which can then be enabled
 		 * through the <i>sPaginationType</i> initialisation parameter. Each pagination type that
 		 * is added is an object (the property name of which is what <i>sPaginationType</i> refers
-		 * to) that has two properties, both methods that are used by DataTables to update the
+		 * to) that has two properties, both methods that are used by DataTables to get_update the
 		 * control's state.
 		 *   <ul>
 		 *     <li>
@@ -7263,7 +7263,7 @@
 		 *     </il>
 		 *     <li>
 		 *       fnInit -  This function is called whenever the paging status of the table changes and is
-		 *         typically used to update classes and/or text of the paging controls to reflex the new 
+		 *         typically used to get_update classes and/or text of the paging controls to reflex the new
 		 *         status.
 		 *       <ul>
 	     *         <li>
@@ -11555,7 +11555,7 @@
 			 * Returns:  -
 			 * Inputs:   object:oSettings - dataTables settings object
 			 *           node:nPaging - the DIV which contains this pagination control
-			 *           function:fnCallbackDraw - draw function which must be called on update
+			 *           function:fnCallbackDraw - draw function which must be called on get_update
 			 */
 			"fnInit": function ( oSettings, nPaging, fnCallbackDraw )
 			{
@@ -11652,7 +11652,7 @@
 			 * Returns:  -
 			 * Inputs:   object:oSettings - dataTables settings object
 			 *           node:nPaging - the DIV which contains this pagination control
-			 *           function:fnCallbackDraw - draw function which must be called on update
+			 *           function:fnCallbackDraw - draw function which must be called on get_update
 			 */
 			"fnInit": function ( oSettings, nPaging, fnCallbackDraw )
 			{

@@ -19,7 +19,7 @@
     _disabled = 'disabled',
     _determinate = 'determinate',
     _indeterminate = 'in' + _determinate,
-    _update = 'update',
+    _update = 'get_update',
     _type = 'type',
     _click = 'click',
     _touch = 'touchbegin.i touchend.i',

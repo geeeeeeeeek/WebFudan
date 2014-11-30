@@ -7780,7 +7780,7 @@ THREE.Object3D.prototype = {
 
 		}
 
-		// update children
+		// get_update children
 
 		for ( var i = 0, l = this.children.length; i < l; i ++ ) {
 
@@ -9266,7 +9266,7 @@ THREE.Geometry = function () {
 
 	this.dynamic = true; // the intermediate typed arrays will be deleted when set to false
 
-	// update flags
+	// get_update flags
 
 	this.verticesNeedUpdate = false;
 	this.elementsNeedUpdate = false;
@@ -14228,7 +14228,7 @@ THREE.Texture.prototype = {
 
 	update: function () {
 
-		this.dispatchEvent( { type: 'update' } );
+		this.dispatchEvent( { type: 'get_update' } );
 
 	},
 
@@ -15836,7 +15836,7 @@ THREE.LensFlare.prototype.add = function ( texture, size, distance, blending, co
 };
 
 /*
- * Update lens flares update positions on all flares based on the screen position
+ * Update lens flares get_update positions on all flares based on the screen position
  * Set myLensFlare.customUpdateCallback to alter the flares in your project specific way.
  */
 
@@ -21000,15 +21000,15 @@ THREE.WebGLRenderer = function ( parameters ) {
 		_currentCamera = null;
 		_lightsNeedUpdate = true;
 
-		// update scene graph
+		// get_update scene graph
 
 		if ( scene.autoUpdate === true ) scene.updateMatrixWorld();
 
-		// update camera matrices and frustum
+		// get_update camera matrices and frustum
 
 		if ( camera.parent === undefined ) camera.updateMatrixWorld();
 
-		// update Skeleton objects
+		// get_update Skeleton objects
 
 		scene.traverse( function ( object ) {
 
@@ -25021,7 +25021,7 @@ THREE.LensFlarePlugin = function ( renderer, flares ) {
 		gl.enableVertexAttribArray( attributes.vertex );
 		gl.enableVertexAttribArray( attributes.uv );
 
-		// loop through all lens flares to update their occlusion and positions
+		// loop through all lens flares to get_update their occlusion and positions
 		// setup gl and common used attribs/unforms
 
 		gl.uniform1i( uniforms.occlusionMap, 0 );
@@ -25101,7 +25101,7 @@ THREE.LensFlarePlugin = function ( renderer, flares ) {
 				gl.drawElements( gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0 );
 
 
-				// update object positions
+				// get_update object positions
 
 				flare.positionScreen.copy( screenPosition )
 
@@ -25432,7 +25432,7 @@ THREE.ShadowMapPlugin = function ( _renderer, _lights, _webglObjects, _webglObje
 			shadowMatrix.multiply( shadowCamera.projectionMatrix );
 			shadowMatrix.multiply( shadowCamera.matrixWorldInverse );
 
-			// update camera matrices and frustum
+			// get_update camera matrices and frustum
 
 			_projScreenMatrix.multiplyMatrices( shadowCamera.projectionMatrix, shadowCamera.matrixWorldInverse );
 			_frustum.setFromMatrix( _projScreenMatrix );
@@ -25865,7 +25865,7 @@ THREE.SpritePlugin = function ( renderer, sprites ) {
 		}
 
 
-		// update positions and sort
+		// get_update positions and sort
 
 		for ( var i = 0, l = sprites.length; i < l; i ++ ) {
 
@@ -27687,7 +27687,7 @@ THREE.Gyroscope.prototype.updateMatrixWorld = ( function () {
 
 		this.matrixAutoUpdate && this.updateMatrix();
 
-		// update matrixWorld
+		// get_update matrixWorld
 
 		if ( this.matrixWorldNeedsUpdate || force ) {
 
@@ -27714,7 +27714,7 @@ THREE.Gyroscope.prototype.updateMatrixWorld = ( function () {
 
 		}
 
-		// update children
+		// get_update children
 
 		for ( var i = 0, l = this.children.length; i < l; i ++ ) {
 

@@ -931,7 +931,7 @@
                     if (input._valueGet() == getActiveBufferTemplate().join(''))
                         $input.trigger('cleared');
 
-                    if (opts.showTooltip) { //update tooltip
+                    if (opts.showTooltip) { //get_update tooltip
                         $input.prop("title", getActiveMaskSet()["mask"]);
                     }
                 } else if (k == opts.keyCode.END || k == opts.keyCode.PAGE_DOWN) { //when END or PAGE_DOWN pressed set position at lastmatch
@@ -1120,7 +1120,7 @@
                             }
                         }
 
-                        if (opts.showTooltip) { //update tooltip
+                        if (opts.showTooltip) { //get_update tooltip
                             $input.prop("title", getActiveMaskSet()["mask"]);
                         }
 

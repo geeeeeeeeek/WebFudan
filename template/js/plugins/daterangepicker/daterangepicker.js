@@ -184,7 +184,7 @@
             if (typeof options.dateLimit == 'object')
                 this.dateLimit = options.dateLimit;
 
-            // update day names order to firstDay
+            // get_update day names order to firstDay
             if (typeof options.locale == 'object') {
 
                 if (typeof options.locale.daysOfWeek == 'object') {

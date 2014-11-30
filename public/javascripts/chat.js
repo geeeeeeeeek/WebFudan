@@ -8,7 +8,6 @@ var sendMsg = function (msg) {
     ws.emit('send.message', msg);
 };
 var addMessage = function (from, msg) {
-
     var avatar_index = Math.ceil(Math.random() * 5);
     var item = document.createElement('div');
     item.className = 'item';
@@ -18,11 +17,8 @@ var addMessage = function (from, msg) {
     '<i class="fa fa-clock-o"></i>' + new Date().getHours() + ':'
     + new Date().getMinutes() + '</small>' + from + '</a>' + msg + '</p>';
     document.querySelector('#chat-box').appendChild(item);
-    // 设置内容区的滚动条到底部
     document.querySelector('#chat-box').scrollTop = document.querySelector('#chat-box').scrollHeight;
-    // 并设置焦点
     document.querySelector('#input').focus();
-
 };
 
 var send = function () {
@@ -31,7 +27,7 @@ var send = function () {
     console.log(msg);
     if (!msg) return;
     sendMsg(msg);
-    // 添加消息到自己的内容区
+    // Add message to my chat
     addMessage('我', msg);
     ele_msg.value = '';
 };
@@ -45,7 +41,7 @@ ws.on('connect', function () {
     ws.emit('join', nickname);
 });
 
-// 昵称有重复
+// Nickname has existed
 ws.on('nickname', function () {
     var nickname = window.prompt('昵称有重复，请重新输入!');
     while (!nickname) {
@@ -61,6 +57,7 @@ ws.on('send.message', function (from, msg) {
 ws.on('announcement', function (from, msg) {
     addMessage(from, msg);
 });
+
 document.querySelector('#input').addEventListener('keypress', function (event) {
     if (event.which == 13) {
         send();

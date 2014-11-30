@@ -1277,7 +1277,7 @@ var io = ('undefined' === typeof module ? {} : module.exports);
 
         /**
          * Handles the response from the server. When a new response is received
-         * it will automatically update the timeout, decode the message and
+         * it will automatically get_update the timeout, decode the message and
          * forwards the response to the onMessage function for further processing.
          *
          * @param {String} data Response from the server.
