@@ -7,33 +7,34 @@ ws.on('connect', function () {
     /**
      * Initialize user's WebGL data, like user's location, behavior, etc. Data packed in one variable.
      * */
-    var webgldata = null;
-    ws.emit('user.update', webgldata);
-    log('WebGL data successfully initialized.');
+    var webgldata = [100, 90];
+    update(webgldata);
 });
 
 
-ws.on('user.update', function (from, data) {
-    reset(from, data);
+ws.on('user.update', function (data) {
+    reset(data);
 });
 
+function init(data) {
+
+}
 /**
- * When some other client updates, it will be sent to all clients.
- * Reset that user in your client by implementing reset.
+ * When some other client updates, it will send a package to all clients.
+ * Reset all users in your client by implementing reset.
  * */
-function reset(from, update) {
+function reset(update) {
     /*
-    * @param from: the user's nickname
-    * @param update: the user's WebGL data
-    * */
+     * @param update: all users' WebGL data
+     * */
     // Do something to update user
-    log('ALL: WebGL data of User ' + from + ' successfully updated.');
+    var nickname = document.getElementById("name").value;
+    drawUser(nickname,update);
 }
 
 /**
  * As long as the user in this client changes, invoke update with its WebGl data.
  * */
-function update(webglldata) {
+function update(webgldata) {
     ws.emit('user.update', webgldata);
-    log('WebGL data successfully updated.');
 }

@@ -36,6 +36,26 @@ var getAllNickname = function () {
 
 // WebGL related data collection
 var packs = [];
+function packData(from, webgldata) {
+    for (var i = 0; i < packs.length; i++) {
+        if (packs[i][0] == from) {
+            packs[i][1] = webgldata;
+            return;
+        }
+    }
+    packs[packs.length] = [from, webgldata];
+}
+
+function unpackData(from) {
+    for (var i = 0; i < packs.length; i++) {
+        if (packs[i][0] == from) {
+            for (var j = i; j < packs.length - 1; j++)
+                packs[j] = packs[j + 1];
+            packs.pop();
+            return;
+        }
+    }
+}
 
 ws.on('connection', function (client) {
     console.log('\033[96msomeone is connect\033[39m \n');
@@ -46,7 +66,6 @@ ws.on('connection', function (client) {
         } else {
             // Initialize user
             client.nickname = msg;
-            client.webgldata = null;
             ws.sockets.emit('announcement', '聊天助手', msg + ' 加入了聊天室!', {type: 'join', name: getAllNickname()});
         }
     });
@@ -57,7 +76,8 @@ ws.on('connection', function (client) {
 
     // Listen WebGL data get_update
     client.on('user.update', function (data) {
-        client.broadcast.emit('user.update', client.nickname, data);
+        packData(client.nickname, data);
+        client.broadcast.emit('user.update',packs);
     });
 
     client.on('disconnect', function () {
@@ -66,6 +86,7 @@ ws.on('connection', function (client) {
                 type: 'disconnect',
                 name: client.nickname
             });
+            unpackData(client.nickname);
         }
     })
 
