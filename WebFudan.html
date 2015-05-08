@@ -2,43 +2,45 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>复旦3D校园 | WebGL课题组</title>
+    <title>复旦3D校园</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="public/stylesheets/font-awesome.min.css" rel="stylesheet"
-          type="text/css"/>
-    <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="public/stylesheets/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="public/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="template/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
     <link href="public/stylesheets/style.css" rel="stylesheet" type="text/css"/>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="public/javascripts/jquery-2.1.3.min.js"></script>
     <script src="public/javascripts/Three.js"></script>
+    <script src="public/javascripts/OBJLoader.js"></script>
     <script src="public/javascripts/webgl.js"></script>
     <script src="public/javascripts/web_fudan.js"></script>
 </head>
 <body class="skin-blue" onload="threeStart();">
 <input id="name" type="text" hidden="hidden" value="">
-<header class="header">
-    <a href="#" class="logo font">
-        WebGL | 复旦3D校园
-    </a>
-    <nav class="navbar navbar-static-top" role="navigation">
-        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </a>
+<!--<header class="nav">-->
+<!--<a href="#" class="logo font">-->
+<!--WebGL | Web Socket-->
+<!--</a>-->
+<!--&lt;!&ndash;<nav class="navbar" role="navigation">-->
+<!--<a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">-->
+<!--<span class="sr-only">Toggle navigation</span>-->
+<!--<span class="icon-bar"></span>-->
+<!--<span class="icon-bar"></span>-->
+<!--<span class="icon-bar"></span>-->
+<!--</a>-->
 
-        <div style="margin-top: 10px;font-size: large;color: white;">A/D变换视角；上下左右控制人物(黑色是自己，绿色是别人)；走到相应建筑物中按空格键可进入相应界面
-        </div>
+<!--&lt;!&ndash;<div style="margin-top: 10px;font-size: large;color: white;">A/D变换视角；上下左右控制人物(黑色是自己，绿色是别人)；走到相应建筑物中按空格键可进入相应界面&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
 
-    </nav>
-</header>
+<!--</nav>&ndash;&gt;-->
+<!--</header>-->
 
 <div class="wrapper row-offcanvas row-offcanvas-left">
     <aside class="left-side sidebar-offcanvas">
         <section class="sidebar" style="background: #fff;">
+            <div class="title">
+                <img src="public/images/fudanlogo.png" width="26px" height="26px" style="vertical-align: sub">&nbsp;复旦3D校园
+            </div>
             <div class="user-panel">
                 <div class="pull-left image">
                     <img src="template/img/avatar3.png" class="img-circle" alt="User Image"/>
@@ -59,24 +61,29 @@
                 <div class="box-body chat" id="chat-box">
 
                 </div>
-                <div class="box-footer" style="margin-bottom: 0;">
-                    <div class="input-group">
-                        <input class="form-control" placeholder="在此输入" id="input"/>
 
-                        <div class="input-group-btn">
-                            <button class="btn btn-success" id="send">发送</button>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </section>
+        <div class="box-footer">
+
+            <div class="input-group">
+                <input class="form-control" placeholder="在此输入" id="input"/>
+
+                <div class="input-group-btn">
+                    <button class="btn btn-success" id="send">发送</button>
+                </div>
+            </div>
+        </div>
     </aside>
 
     <aside class="right-side">
         <section class="content">
             <div id="canvas-frame"></div>
         </section>
+        <div class="note">
+            <b>说明：</b><br>① A/D变换视角<br>② 上下左右控制人物走动<br>③ 走到相应建筑物中空格进入相应界面
+        </div>
     </aside>
 </div>
 

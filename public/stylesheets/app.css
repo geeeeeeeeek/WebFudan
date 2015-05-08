@@ -18,6 +18,7 @@ body{
     margin: 10px auto;
     background-color: #EFF4FA;
     box-sizing: border-box;
+    position: relative;
 }
 
 .wrapper .content{

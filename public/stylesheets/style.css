@@ -1,11 +1,11 @@
 body {
-    font: 14px "Microsoft YaHei", Arial, sans-serif;
+    font: 15px "Microsoft YaHei", Arial, sans-serif;
     height: 100%;
 }
 
 #chat-box {
-    min-height: 600px;
-    max-height: 600px;
+    /*min-height: 600px;*/
+    /*max-height: 600px;*/
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -23,19 +23,84 @@ body {
 }
 
 div#canvas-frame {
+    position: absolute;
+    left: 120px;
+    right: 0;
+    top: 0;
+    bottom: 0;
     border: none;
-    cursor: pointer;
-    width: 1000px;
-    height: 600px;
+    cursor: default;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
     background-color: #f9f9f9 !important;
 }
 
-.sub-header{
+canvas{
+    display: block;
+}
+
+.sub-header {
     text-align: center;
     font-size: small;
     margin-top: 10px;
 }
 
-.mid_text{
+.mid_text {
     text-align: center;
+}
+
+div.box-footer {
+    position: absolute;
+    bottom: 0;
+    margin: 10px;
+}
+
+.left-side {
+    top: 0 !important;
+    width: 320px;
+    bottom: 0;
+}
+
+.title {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    background: #00a65a;
+    color: #FFFFFF;
+    line-height: 50px;
+    font-size: 24px;
+}
+
+.box .chat .item > .message {
+    word-wrap: break-word;
+}
+
+.user-panel {
+    padding: 20px;
+}
+
+.box-header {
+    padding-left: 10px;
+}
+
+.box .chat {
+    padding: 10px 20px;
+}
+
+.info > p {
+    font-size: 18px;
+}
+
+.info > a {
+    font-size: 16px;
+}
+
+.note{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0.9;
+    line-height: 22px;
 }
