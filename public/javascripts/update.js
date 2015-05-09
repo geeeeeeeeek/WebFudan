@@ -7,7 +7,7 @@ ws.on('connect', function () {
     /**
      * Initialize user's WebGL data, like user's location, behavior, etc. Data packed in one variable.
      * */
-    var webgldata = [100, 90];
+    var webgldata = [100, 100];
     update(webgldata);
 });
 

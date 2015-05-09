@@ -180,6 +180,7 @@ function initObject() {
         turn = 0;
         scene.add(self);
         self.position.set(sx, sy, 0);
+        renderer.render(scene, camera);
     });
 
     //self = new THREE.Mesh(
