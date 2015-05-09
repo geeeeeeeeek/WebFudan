@@ -16,9 +16,7 @@ ws.on('user.update', function (data) {
     reset(data);
 });
 
-function init(data) {
 
-}
 /**
  * When some other client updates, it will send a package to all clients.
  * Reset all users in your client by implementing reset.
@@ -29,7 +27,7 @@ function reset(update) {
      * */
     // Do something to update user
     var nickname = document.getElementById("name").value;
-    drawUser(nickname,update);
+    drawUser(nickname, update);
 }
 
 /**
@@ -37,4 +35,8 @@ function reset(update) {
  * */
 function update(webgldata) {
     ws.emit('user.update', webgldata);
+}
+
+function init(data) {
+
 }

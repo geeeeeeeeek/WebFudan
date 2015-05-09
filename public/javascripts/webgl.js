@@ -1,5 +1,5 @@
 var self;
-var sx, sy, cy, flag;
+var sx = 100, sy = 100, cy, flag;
 var angles = [0, 3.14 / 2, 3.14, 3.14 / 2 * 3, 3.14 * 2, 3.14 / 2 * 5, 3.14 / 2 * 6, 3.14 / 2 * 7];
 var turn;
 var dif = [0, 1, 2, 3];
@@ -56,7 +56,7 @@ function initLight() {
 //立方体
 
 function initObject() {
-    sx = sy = 100;
+    //sx = sy = 100;
     var cube1 = new THREE.Mesh(
         new THREE.CubeGeometry(30, 30, 150), //设置形状
         new THREE.MeshLambertMaterial({color: 0x5F9EA0}) //设置材质
@@ -195,6 +195,9 @@ function sendAlert() {
 }
 
 
+count = 0;
+array = [];
+
 function drawUser(from, webgldata) {
     //alert(webgldata);
     //定时更新其他用户的信息，其中省略号表示通过通讯获得的变量
@@ -202,30 +205,30 @@ function drawUser(from, webgldata) {
     initScene();
     initLight();
     initObject();
-    var array = webgldata;
+    count = 0;
+    array = webgldata;
+    console.log('welgldata  ' + array);
     for (var i = 0; i < array.length; i++) {
-        dx = array[i][1][0];
-        dy = array[i][1][1];
-        dname = array[i][0];
         if (array[i][0] == from) {
-            //sx = dx;
-            //sy = dy;
-            //self.position.set(sx, sy, 0);
-
-        } else {
-            var loader = new THREE.OBJLoader();
-            var x = array[i][1][0];
-            var y = array[i][1][1];
-            loader.load('./people.obj', function (result) {
-                result.rotateX(3.14 / 2);
-                result.rotateY(3.14 / 2);
-                scene.add(result);
-                result.position.set(x, y, 0);
-                //alert('from ' + from + " to " + dname);
-                renderer.render(scene, camera);
-            })
-
+            self.position.set(array[i][1][0], array[i][1][1], 0);
+            console.log('after' + array[i][1][0] + "   " + array[i][1][1]);
+            array.splice(i, 1);
+            renderer.render(scene, camera);
+            break;
         }
+    }
+    for (var i = 0; i < array.length; i++) {
+        var loader = new THREE.OBJLoader();
+        loader.load('./people.obj', function (result) {
+            console.log('draw' + array[count][1][0] + " " + array[count][1][1]);
+            result.rotateX(3.14 / 2);
+            result.rotateY(3.14 / 2);
+            scene.add(result);
+            result.position.set(array[count][1][0], array[count][1][1], 0);
+            count += 1;
+            //alert('from ' + from + " to " + dname);
+            renderer.render(scene, camera);
+        })
 
     }
     //renderer.render(scene, camera);
