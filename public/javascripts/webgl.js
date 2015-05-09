@@ -1,8 +1,8 @@
 var self;
-var sx, sy, cy,flag;
-var angles = [0, 3.14 / 2,3.14,3.14 / 2 * 3, 3.14 * 2,3.14/2*5, 3.14/2*6,3.14 /2*7];
+var sx, sy, cy, flag;
+var angles = [0, 3.14 / 2, 3.14, 3.14 / 2 * 3, 3.14 * 2, 3.14 / 2 * 5, 3.14 / 2 * 6, 3.14 / 2 * 7];
 var turn;
-var dif = [0,1,2,3];
+var dif = [0, 1, 2, 3];
 
 //渲染器初始化
 var renderer;
@@ -172,14 +172,14 @@ function initObject() {
     );
     scene.add(cube14);
     cube14.position.set(60, 230, -30);
-    var  loader  =  new THREE.OBJLoader();
-    loader.load('./people.obj',function(result){
+    var loader = new THREE.OBJLoader();
+    loader.load('./people.obj', function (result) {
         self = result;
         self.rotateX(3.14 / 2);
         self.rotateY(3.14 / 2);
         turn = 0;
         scene.add(self);
-        self.position.set(sx,sy,0);
+        self.position.set(sx, sy, 0);
     });
 
     //self = new THREE.Mesh(
@@ -188,12 +188,12 @@ function initObject() {
     //);
 
 
-
 }
 
 function sendAlert() {
     //alert("hello");
 }
+
 
 function drawUser(from, webgldata) {
     //alert(webgldata);
@@ -204,28 +204,32 @@ function drawUser(from, webgldata) {
     initObject();
     var array = webgldata;
     for (var i = 0; i < array.length; i++) {
-        var x = array[i][1][0];
-        var y = array[i][1][1];
+        dx = array[i][1][0];
+        dy = array[i][1][1];
+        dname = array[i][0];
         if (array[i][0] == from) {
-            //alert(array[i][0]);
-            sx = x;
-            sy = y;
+            //sx = dx;
+            //sy = dy;
+            //self.position.set(sx, sy, 0);
 
-            self.position.set(sx,sy,0);
+        } else {
+            var loader = new THREE.OBJLoader();
+            var x = array[i][1][0];
+            var y = array[i][1][1];
+            loader.load('./people.obj', function (result) {
+                result.rotateX(3.14 / 2);
+                result.rotateY(3.14 / 2);
+                scene.add(result);
+                result.position.set(x, y, 0);
+                //alert('from ' + from + " to " + dname);
+                renderer.render(scene, camera);
+            })
 
-        }else{
-            var cc = new THREE.Mesh(
-                new THREE.CubeGeometry(3, 3, 3),
-                new THREE.MeshLambertMaterial({
-                    color: 0x00ff00
-                })
-            );
-            scene.add(cc);
-            cc.position.set(x, y, 0);
         }
 
     }
-    renderer.render(scene, camera);
+    //renderer.render(scene, camera);
+
 }
 
 //ThreeJs的启动过程
@@ -239,7 +243,7 @@ function threeStart() {
     renderer.render(scene, camera);//开始渲i
     //var timeID = window.setInterval(drawUser, 500);
     window.addEventListener('keydown', function (event) {
-        if($('#input').is(':focus')){
+        if ($('#input').is(':focus')) {
             //DO NOT interrupt user's input
             return;
         }
@@ -320,7 +324,7 @@ function threeStart() {
                 setCamera();
             }
         }
-        self.position.set(sx,sy,0);
+        self.position.set(sx, sy, 0);
         renderer.render(scene, camera);
         if (ip == 1) {
             //用户的位置发生改变
