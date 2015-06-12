@@ -8,7 +8,6 @@
     <orderEntry type="library" name="html5shiv" level="application" />
     <orderEntry type="library" name="respond" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
-    <orderEntry type="library" name="NodeJS node_modules" level="project" />
     <orderEntry type="library" name="WebFudan node_modules" level="project" />
   </component>
 </module>

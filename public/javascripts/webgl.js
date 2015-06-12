@@ -1,7 +1,16 @@
 var self;
-var sx = 100, sy = 100, cy, flag;
-var angles = [0, 3.14 / 2, 3.14, 3.14 / 2 * 3, 3.14 * 2, 3.14 / 2 * 5, 3.14 / 2 * 6, 3.14 / 2 * 7];
-var turn;
+var sx = 260, sy = 100, cy = 100, flag;
+var angles = [0, 3.14 / 2, 3.14,3.14 / 2 * 3, 3.14 * 2, 3.14 / 2 * 5, 3.14 / 2 * 6,     3.14 / 2 * 7];
+var spinx = [10,0,-10,0];
+var spiny = [0,10,0,-10];
+var lookx = [50,0,-50,0];
+var looky = [0,50,0,-50];
+var backx = [-20,0,20,0];
+var backy = [0,-20,0,20];
+var cha = 0;
+var turn = 0;
+var nextx = spinx[turn];
+var nexty = spiny[turn];
 var dif = [0, 1, 2, 3];
 
 //渲染器初始化
@@ -14,6 +23,7 @@ function initThree() {
     document.getElementById('canvas-frame').appendChild(renderer.domElement);
     renderer.setClearColorHex(0xF9F9F9, 1.0);
     flag = 0;
+    cha = 0;
 }
 //相机
 var camera;
@@ -21,25 +31,34 @@ var camera;
 function initCamera() {
     cy = 100;
     camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
-    camera.position.x = 300;
-    camera.position.y = cy;
-    camera.position.z = 300;
+    camera.position.x = sx + backx[turn];
+    camera.position.y = sy + backy[turn];
+    camera.position.z = 20;
     camera.up.x = 0;
     camera.up.y = 0;
     camera.up.z = 1;
-    camera.lookAt({x: 100, y: 100, z: 0});
+    camera.lookAt({x: sx + lookx[turn], y: sy + looky[turn], z: 20});
+}
+
+function moveCamera(){
+    camera.position.x = sx + backx[turn];
+    camera.position.y = sy + backy[turn];
+    camera.position.z = 20;
+    camera.up.x = 0;
+    camera.up.y = 0;
+    camera.up.z = 1;
+    camera.lookAt({x: sx + lookx[turn], y: sy + looky[turn], z: 20});
 }
 
 function setCamera() {
+    camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
     camera.position.x = 300;
     camera.position.y = cy;
     camera.position.z = 300;
     camera.up.x = 0;
     camera.up.y = 0;
     camera.up.z = 1;
-    camera.lookAt({
-        x: 100, y: 100, z: 0
-    });
+    camera.lookAt({x: 100, y: 100, z: 20});
 }
 //场景
 var scene;
@@ -50,128 +69,67 @@ function initScene() {
 var light;
 function initLight() {
     light = new THREE.DirectionalLight(0xF9F9F9, 1.0, 0);
-    light.position.set(100, 200, 300);
+    light.position.set(500, 100, 300);
     scene.add(light);
 }
 //立方体
 
 function initObject() {
     //sx = sy = 100;
+    var groundGeometry = new THREE.PlaneGeometry(2000, 2000, 1, 1);
+    ground = new THREE.Mesh(groundGeometry,  new THREE.MeshLambertMaterial({
+        color: 0xD3D3D3
+    }));
+    ground.position.y = -500;
+    ground.position.x = -500;
+    this.scene.add(ground);
+
+    var skyBoxGeometry = new THREE.CubeGeometry(700, 500, 500);
+    var skyBoxMaterial = new THREE.MeshBasicMaterial(
+        { color: 0x87CEEB, side: THREE.BackSide });
+    var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
+    scene.add(skyBox);
     var cube1 = new THREE.Mesh(
-        new THREE.CubeGeometry(30, 30, 150), //设置形状
-        new THREE.MeshLambertMaterial({color: 0x5F9EA0}) //设置材质
+        new THREE.CubeGeometry(20, 40, 33), //设置形状
+        new THREE.MeshLambertMaterial({color: 0x646C75}) //设置材质
     );
     scene.add(cube1);
-    cube1.position.set(0, 75, 0);
+    cube1.position.set(58, 150, 20);
 
-    var cube2 = new THREE.Mesh(
-        new THREE.CubeGeometry(30, 30, 150), //设置形状
-        new THREE.MeshLambertMaterial({color: 0x5F9EA0}) //设置材质
+    var loade = new THREE.ColladaLoader();
+    loade.load("GuangHua_Building.dae",function(result){
+        scene.add(result.scene);
+        result.scene.rotateZ(-3.14/2);
+        result.scene.position.set(20,130,0);
+
+        renderer.render(scene, camera);
+
+    });
+
+    var loade = new THREE.ColladaLoader();
+    loade.load("sushe.dae",function(result){
+        scene.add(result.scene);
+        result.scene.position.set(100,-90,0);
+        renderer.render(scene, camera);
+
+    });
+
+    var loade = new THREE.ColladaLoader();
+    loade.load("teaching.dae",function(result){
+        scene.add(result.scene);
+        result.scene.position.set(0,0,0);
+        renderer.render(scene, camera);
+
+    });
+
+    var geometry = new THREE.ImageUtils.loadTexture("Max/grass.jpg")
+    var cube = new THREE.Mesh(
+        new THREE.CubeGeometry(50, 120,2), //设置形状
+        new THREE.MeshBasicMaterial({map:geometry,color:0xffffff,wireframe:false}) //设置材质
     );
-    scene.add(cube2);
-    cube2.position.set(0, 115, 0);
+    scene.add(cube);
+    cube.position.set(125, 100, 0);
 
-    var cube3 = new THREE.Mesh(
-        new THREE.CubeGeometry(30, 90, 50), //设置形状
-        new THREE.MeshLambertMaterial({color: 0xD3D3D3}) //设置材质
-    );
-    scene.add(cube3);
-    cube3.position.set(0, 95, -50);
-
-    var circle = new THREE.Mesh(
-        new THREE.CircleGeometry(30, 30), //设置形状
-        new THREE.MeshLambertMaterial({color: 0x00FA9A}) //设置材质
-    );
-    scene.add(circle);
-    circle.position.set(120, 100, 0);
-
-    var cube4 = new THREE.Mesh(
-        new THREE.CubeGeometry(80, 30, 30), //设置形状
-        new THREE.MeshLambertMaterial({color: 0xDC143C}) //设置材质
-    );
-    scene.add(cube4);
-    cube4.position.set(30, 0, -30);
-
-
-    var cube5 = new THREE.Mesh(
-        new THREE.CubeGeometry(80, 30, 30), //设置形状
-        new THREE.MeshLambertMaterial({color: 0xDC143C}) //设置材质
-    );
-    scene.add(cube5);
-    cube5.position.set(30, 190, -30);
-
-
-    var cube6 = new THREE.Mesh(
-        new THREE.CubeGeometry(30, 50, 30), //设置形状
-        new THREE.MeshLambertMaterial({color: 0xDC143C}) //设置材质
-    );
-    scene.add(cube6);
-    cube6.position.set(130, 190, -30);
-
-    var cube7 = new THREE.Mesh(
-        new THREE.CubeGeometry(30, 50, 30), //设置形状
-        new THREE.MeshLambertMaterial({color: 0xDC143C}) //设置材质
-    );
-    scene.add(cube7);
-    cube7.position.set(130, 0, -30);
-
-    var cube8 = new THREE.Mesh(
-        new THREE.CubeGeometry(5, 5, 20), //设置形状
-        new THREE.MeshLambertMaterial({color: 0xDC143C}) //设置材质
-    );
-    scene.add(cube8);
-    cube8.position.set(160, 85, -30);
-
-
-    var cube9 = new THREE.Mesh(
-        new THREE.CubeGeometry(5, 5, 20), //设置形状
-        new THREE.MeshLambertMaterial({color: 0xDC143C}) //设置材质
-    );
-    scene.add(cube9);
-    cube9.position.set(160, 105, -30);
-
-    var cube10 = new THREE.Mesh(
-        new THREE.CubeGeometry(5, 25, 5), //设置形状
-        new THREE.MeshLambertMaterial({color: 0x808080}) //设置材质
-    );
-    scene.add(cube10);
-    cube10.position.set(160, 95, -20);
-
-    var cube10 = new THREE.Mesh(
-        new THREE.CubeGeometry(3, 125, 3), //设置形状
-        new THREE.MeshLambertMaterial({color: 0x000000}) //设置材质
-    );
-    scene.add(cube10);
-    cube10.position.set(160, 17, -40);
-
-    var cube11 = new THREE.Mesh(
-        new THREE.CubeGeometry(3, 125, 3), //设置形状
-        new THREE.MeshLambertMaterial({color: 0x000000}) //设置材质
-    );
-    scene.add(cube11);
-    cube11.position.set(160, 173, -40);
-
-    var cube12 = new THREE.Mesh(
-        new THREE.CubeGeometry(3, 270, 3), //设置形状
-        new THREE.MeshLambertMaterial({color: 0x000000}) //设置材质
-    );
-    scene.add(cube12);
-    cube12.position.set(-40, 97, -30);
-
-    var cube13 = new THREE.Mesh(
-        new THREE.CubeGeometry(205, 3, 3), //设置形状
-        new THREE.MeshLambertMaterial({color: 0x000000}) //设置材质
-    );
-    scene.add(cube13);
-    cube13.position.set(60, -40, -30);
-
-
-    var cube14 = new THREE.Mesh(
-        new THREE.CubeGeometry(205, 3, 3), //设置形状
-        new THREE.MeshLambertMaterial({color: 0x000000}) //设置材质
-    );
-    scene.add(cube14);
-    cube14.position.set(60, 230, -30);
     var loader = new THREE.OBJLoader();
     loader.load('./people.obj', function (result) {
         self = result;
@@ -258,32 +216,48 @@ function threeStart() {
             var d = key - turn + 4;
             self.rotateY(angles[d]);
             turn = 3;
+
             if (d == 0 || d == 4)
-                sy = sy - 10;
+                sy = sy + spiny[turn];
+            if (cha == 0)
+                moveCamera();
+            else setCamera();
             ip = 1;
         } else if (k == 38) {
             var key = 2;
             var d = key - turn + 4;
             self.rotateY(angles[d]);
             turn = 2;
+
             if (d == 0 || d == 4)
-                sx = sx - 10;
+                sx = sx + spinx[turn];
+            if (cha == 0)
+                moveCamera();
+            else setCamera();
             ip = 1;
         } else if (k == 39) {
             var key = 1;
             var d = key - turn + 4;
             self.rotateY(angles[d]);
             turn = 1;
+
             if (d == 0 || d == 4)
-                sy = sy + 10;
+                sy = sy + spiny[turn];
+            if (cha == 0)
+                moveCamera();
+            else setCamera();
             ip = 1;
         } else if (k == 40) {
             var key = 0;
             var d = key - turn + 4;
             self.rotateY(angles[d]);
             turn = 0;
+
             if (d == 0 || d == 4)
-                sx = sx + 10;
+                sx = sx + spinx[turn];
+            if (cha == 0)
+                moveCamera();
+            else setCamera();
             ip = 1;
         } else if (k == 32) {
             if (sx <= 90 && sx >= 20 && sy >= 0 && sy <= 20) {
@@ -316,13 +290,18 @@ function threeStart() {
                 alert("guangcao");
                 window.open("http://www.fdty.fudan.edu.cn");
             }
-        } else if (k == 65) {
+        } else if (k == 80) {
+            cha = 1 - cha;
+            if (cha == 1)
+                setCamera();
+            else moveCamera();
+        }else if (k == 65 && cha == 1) {
             if (cy >= 0) {
                 cy -= 40;
                 setCamera();
             }
         }
-        else if (k == 68) {
+        else if (k == 68 && cha == 1) {
             if (cy <= 240) {
                 cy += 40;
                 setCamera();
